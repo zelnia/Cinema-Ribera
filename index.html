@@ -1,0 +1,287 @@
+<!DOCTYPE html> 
+<!-- C5:C1:48:AE:1A:AE:A8:0E:6E:A0:04:6F:56:13:40:8D:E3:7E:61:F5;com.CinemaAG -->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cinema Agrigento Web App</title>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<link rel="stylesheet" href="css/cinemaagrigento.min.css" />
+<link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+<link href="css/jquery.mobile.custom.structure.min.css" rel="stylesheet" type="text/css"/>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<!--script type="text/javascript" charset="utf-8" src="cordova.js"></script-->
+    <script type="text/javascript" charset="utf-8">
+    $( document ).on( "mobileinit", function() {
+  		$.mobile.defaultPageTransition = "slide";
+	});	
+	$(function(){
+	    // Bind the swiperightHandler callback function to the swipe event on div.box
+	  $( "#page2, #page3, #page4, #page5, #page6" ).on( "swiperight", swiperightHandler );
+	 
+	  // Callback function references the event target and adds the 'swiperight' class to it
+	  function swiperightHandler( event ){
+	    $.mobile.changePage( "#page", {reverse:true});
+	  }
+	});
+	/*$(function(){
+	    // Bind the swiperightHandler callback function to the swipe event on div.box
+	  $( "#page" ).on( "swipeleft", swipelefthomeHandler );
+	 
+	  // Callback function references the event target and adds the 'swiperight' class to it
+	  function swipelefthomeHandler( event ){
+	  	var previousPage = $.mobile.activePage.prev('[data-role=page]');
+		$.mobile.changePage(previousPage, {reverse:false});
+	  }
+	});*/
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("online", onOnline, false);
+    document.addEventListener("offline", onOffline, false);
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        checkConnection();
+    }
+
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+    	var dirciak = document.getElementById('versociak');
+    	var linkmappaciak='https://www.google.com/maps/dir/'+ position.coords.latitude +','+ position.coords.longitude +'/Via+XXV+Aprile+88+Agrigento';
+    	dirciak.setAttribute('href',linkmappaciak);
+
+		var dirastor = document.getElementById('versoastor');
+    	var linkmappaastor='https://www.google.com/maps/dir/'+ position.coords.latitude +','+ position.coords.longitude +'/Piazza+Vittorio+Emanuele+10+Agrigento';
+    	dirastor.setAttribute('href',linkmappaastor);
+
+		var diraconcordia = document.getElementById('versoconcordia');
+    	var linkmappaconcordia='https://www.google.com/maps/dir/'+ position.coords.latitude +','+ position.coords.longitude +'/Via+Francesco+Crispi+Agrigento';
+    	diraconcordia.setAttribute('href',linkmappaconcordia);
+
+		var dirribera = document.getElementById('versoribera');
+    	var linkmapparibera='https://www.google.com/maps/dir/'+ position.coords.latitude +','+ position.coords.longitude +'/Piazza+Castello+2+Ribera';
+    	dirribera.setAttribute('href',linkmapparibera);
+    // onError Callback receives a PositionError object
+    //
+}
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    function checkConnection() {
+            var networkState = navigator.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI]     = 'WiFi connection';
+            states[Connection.CELL_2G]  = 'Cell 2G connection';
+            states[Connection.CELL_3G]  = 'Cell 3G connection';
+            states[Connection.CELL_4G]  = 'Cell 4G connection';
+            states[Connection.CELL]     = 'Cell generic connection';
+            states[Connection.NONE]     = 'No network connection';
+
+
+            if (states[networkState] == 'No network connection') {
+            	onOffline();
+            }
+        }
+
+
+    function onOffline(){
+    	//$(".need_conn").addClass("disabilitato");
+    	$(".need_conn").addClass("ui-disabled");
+    	//$('.disabilitato').bind('click', function(e){e.preventDefault();})
+    }
+    function onOnline(){$(".need_conn").removeClass("ui-disabled");}
+
+
+    </script>
+    <script src="js/jquery.mobile.custom.min.js" type="text/javascript"></script>
+</head> 
+<body> 
+<div data-role="page" id="page">
+	<div data-role="header">
+		<h1>Cinema Ribera</h1>
+	</div>
+	<div data-role="content">
+			<p style="text-align:center;"><img src="images/cineteatro.png" alt="Cine Teatro Lupo" title="Cine Teatro Lupo" style="width:100%; margin:0px 10px;max-width:400px;" /><p><br>
+		     <ul data-role="listview">
+		  		<li><a href="#page6">Informazioni</a></li>
+		  		<li><a href="#page7">Prezzi</a></li>
+		  		<li><a href="#page8">Convenzioni</a></li>
+             	<li class="need_conn"><a href="http://www.cinemaribera.it/film-di-oggi-2">Programmazione</a></li>
+				<li class="need_conn"><a href="http://www.cinemaribera.it/prossimamente2">Prossimamente</a></li>
+			</ul>
+		<br>
+		<div data-role="collapsible" data-content-theme="c">
+			<h3>Scopri anche i cinema di Agrigento!</h3>
+			<p style="text-align: center;"><img src="images/concordiaO.png" style="width:33%" alt="Logo Cinema"><img src="images/astorO.png" style="width:33%" alt="Logo Cinema"><img src="images/ciakO.png" style="width:33%" alt="Logo Cinema"> </p>
+	        <ul data-role="listview">
+			  <li><a href="#page2">Le Sale</a></li>
+				<li><a href="#page4">Prezzi</a></li>
+	            <li><a href="#page5">Convenzioni</a></li>
+	            <li class="need_conn">
+	            <a  href="http://www.cinemaagrigento.it/film-di-oggi-2">Programmazione</a>
+	            <!--div class="by_conn">(Richiede la connessione a internet)</div-->
+	            </li>
+				<li class="need_conn"><a href="http://www.cinemaagrigento.it/prossimamente2">Prossimamente</a></li>
+			</ul>
+		</div>		
+	</div>
+</div>
+
+<div data-role="page" id="page2">
+	<div data-role="header">
+		<h1>Contatti</h1>
+	</div>
+	<div data-role="content">
+		<p style="text-align: center; margin-bottom:-20px;">
+			<img src="images/lupoO.png" alt="Logo Lupo" title="Contatta Cinema Agrigento!" style="height:180px;" />
+		</p>
+		<a href="tel:+390922596015" data-role="button" style="display:block;" class="ui-btn ui-icon-phone ui-btn-icon-left"><strong>INFOLINE 0922 596015</strong></a>
+		<a href="mailto:info@cinemaagrigento.it" title="Contatta Cinema Agrigento!" data-role="button" style="display:block;" class="ui-btn ui-icon-mail ui-btn-icon-right" ><strong>Email: info@cinemaagrigento.it</strong></a>
+		<div data-role="collapsible" data-content-theme="c">
+  		 	<h3>Ciak</h3>
+   			<p style="text-align: center;"><img src="images/ciakO.png" alt="Logo Ciak" title="Logo Ciak" width="161" height="69" style=" margin-left: 10px; margin-right: 10px;" />
+   			<br />
+   			<strong>Via XXV Aprile, 88 - 92100 Agrigento (AG).
+   			<br />
+			<a href="tel:+390922596015" data-role="button" style="display:block;" class="ui-btn ui-icon-phone ui-btn-icon-left">Tel. 0922 596015</a>
+	    	<a href="https://www.google.it/maps?sll=37.1518673,13.789064099999985&amp;sspn=3.3686724495603206,5.641741068507213&amp;t=m&amp;q=Via+XXV+Aprile,+88+-+92100+Agrigento.&amp;dg=opt&amp;ie=UTF8&amp;hq=&amp;hnear=Via+25+Aprile,+88,+92100+Agrigento,+AG,+Sicilia&amp;ll=37.315431,13.571892&amp;spn=0.020479,0.025749&amp;z=14&amp;iwloc=A&amp;source=embed" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Mappa</a>
+	    	<a id="versociak" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Calcola il percorso</a>
+	    	</strong></p>
+		</div>	
+		<div data-role="collapsible" data-content-theme="c">
+  		 	<h3>Astor</h3>
+   			<p style="text-align: center;">
+   			<img src="images/astorO.png" alt="Logo Astor" title="Logo Astor" width="161" height="66" style=" margin-left: 10px; margin-right: 10px;" /><br />
+   			<strong>Piazza Vittorio Emanuele, 10 - 92100 Agrigento (AG).<br />
+   			<a href="tel:+39092225866" data-role="button" style="display:block;" class="ui-btn ui-icon-phone ui-btn-icon-left">Tel. 0922 25866</a></strong>
+  			<a href="https://www.google.com/maps?sll=37.06247326439922,-95.75688219570166&sspn=78.28419642210842,104.56858677253128&t=m&q=37.311374,+13.58658&dg=opt&ie=UTF8&ll=37.311403,13.586569&spn=0.02048,0.025749&z=14&source=embed" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Mappa</a>
+	    	<a id="versoastor" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Calcola il percorso</a>
+  			</p>
+		</div>	
+		<div data-role="collapsible" data-content-theme="c">
+  		 	<h3>Concordia</h3>
+   			<p style="text-align: center;">
+   			<img src="images/concordiaO.png" alt="Logo Concordia" title="Logo Concordia" width="161" height="66" style="margin-left: 10px; margin-right: 10px; " /><br />
+   			<strong>Via Francesco Crispi - </strong><strong>92100 Agrigento<br />
+   			<a href="tel:+390922665340" data-role="button" style="display:block;" class="ui-btn ui-icon-phone ui-btn-icon-left">Tel. 0922 665340</a></strong>
+  			<a href="https://www.google.com/maps?f=q&source=embed&hl=it&geocode=&q=Via+Francesco+Crispi+-+92100+Agrigento.+&aq=&sll=37.311374,13.58658&sspn=0.01408,0.027874&ie=UTF8&hq=&hnear=Via+Francesco+Crispi,+92100+Agrigento,+Italia&t=m&ll=37.311335,13.586569&spn=0.02048,0.025749&z=14&iwloc=A" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Mappa </a>
+	    	<a id="versoconcordia" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right need_conn">Calcola il percorso</a></p>	
+		</div>	
+		<p align="center" ><img src="images/mappalupo2.jpg" style="width:90%" alt="Mappa Sale"></p>
+  	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+<div data-role="page" id="page4">
+	<div data-role="header">
+		<h1>Prezzi</h1>
+	</div>
+	<div data-role="content">
+		<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+			<h3>2D</h3>
+			<p>BIGLIETTO INTERO <strong>2D</strong> € 7.00</p>
+			<p>MERCOLEDI RIDOTTI X TUTTI € 5.00</p>
+			<p><abbr title="(per bambini fino a 10 anni, over65 , tutte le forze dell’ ordine)( Esibire documento o tesserino di riconoscimento)">BIGLIETTTO RIDOTTO TUTTI I GIORNI € 5.00.</abbr></p>
+		</div><br>
+		<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+			<h3>3D</h3>
+			<p>BIGLIETTO INTERO 3D € 8.00<br>(il prezzo più basso della Provincia)</p>
+			<p>MERCOLEDI RIDOTTI X TUTTI € 6.00</p>
+			<p><abbr title="(per bambini fino a 10 anni, over65 , tutte le forze dell’ ordine)( Esibire documento o tesserino di riconoscimento)">BIGLIETTTO RIDOTTO TUTTI I GIORNI € 6.00.</abbr></p>
+		</div>
+			<p><img src="images/prenotazione.png" alt="Prenota!" style="width: 95%;" /></p>
+			<strong>Grande novità</strong>: oggi solo da noi trovate gli occhiali <strong>dolby junior</strong>anche per i più piccoli !!!
+			<p><span style="font-size: x-small;"> n.b le riduzioni non sono valide nei giorni festivi, nelle prime e non sono cumulabili.</span></p>	
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+
+<div data-role="page" id="page5">
+	<div data-role="header">
+		<h1>Convenzioni</h1>
+	</div>
+	<div data-role="content">	
+		<p style="text-align:center; display:block;"><img src="images/cinecard.png" alt="Cinecard" title="Cinecard" style="width:90%; max-width:500px; margin-left:auto; margin-right:auto;" /></p>
+		<h2 style="margin-bottom:-10px;">		
+		CINE CARD<strong style="color: #ff9900;"> GOLD</strong>:
+		</h2>
+		<p>Valida tutti i giorni della settimana, per <strong>6</strong> ingressi in <strong>3D</strong> e in 2D a soli <strong>30,00</strong>€</p>
+		<h3><img src="images/Grande-Cinema-31.jpg" alt="Grande Cinema 3" style="width:100%; max-width:500px; margin:4px auto 4px auto;" /></h3>
+		<h3>Cinema convenzionato grande cinema 3: tutte le settimane entri al cinema gratis.*</h3>
+		<p><strong>* <em>Valida solo per i film convenzionati Grande Cinema 3<br /><br /></em></strong></p>
+		<p><strong><em><img src="images/partybanner.jpg" alt="Cinema Party" style="width:100%; max-width:500px;" /></em></strong></p>
+		<p>La tua festa di <span style="color: #ff9900;"><strong>compleanno</strong></span> nei <strong style="line-height: 1.3em;">CINEMA LUPO GROUP</strong> ad Agrigento ad un <strong>prezzo eccezionale!</strong></p>
+		<strong><a href="tel:+390922596015" data-role="button" class="ui-btn ui-icon-phone ui-btn-icon-left">Per info e prenotazioni: 0922 596015</a></strong>			
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+<div data-role="page" id="page6">
+	<div data-role="header">
+		<h1>Informazioni</h1>
+	</div>
+	<div data-role="content">	
+ 			<p style="text-align: center;">
+ 			<img src="images/cineteatro.png" alt="Cine Teatro Lupo" title="Cine Teatro Lupo" style="width:100%; margin:0px 10px;max-width:400px;" /><br>
+   			<strong>Piazza Castello 2 92016 Ribera (AG).<br />
+   			<a href="tel:+39092561003" data-role="button" style="display:block;" class="ui-btn ui-icon-phone ui-btn-icon-left">Tel. 0925 61003</a></strong>
+  			<a href="https://maps.google.com?q=Piazza+Castello+2+Ribera" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right">Mappa</a>
+	    	<a id="versoribera" data-role="button" style="display:block;" class="ui-btn ui-icon-location ui-btn-icon-right">Calcola il percorso</a>
+  			</p>
+  			<a href="#page7" data-role="button" style="display:block;" class="ui-btn ui-icon-tag ui-btn-icon-left"><strong>Vai ai Prezzi</strong></a>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+<div data-role="page" id="page7">
+	<div data-role="header">
+		<h1>Prezzi Ribera</h1>
+	</div>
+	<div data-role="content">	
+	 		<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+				<h3>2D</h3>
+				<p>BIGLIETTO INTERO <strong>2D</strong> € 6.00</p>
+				<p>MERCOLEDI RIDOTTI X TUTTI € 5.00</p>
+				<p><abbr title="(per bambini fino a 10 anni, over65 , tutte le forze dell’ ordine)( Esibire documento o tesserino di riconoscimento)">BIGLIETTTO RIDOTTO TUTTI I GIORNI € 5.00.</abbr></p>
+			</div><br>
+			<div data-theme="a" data-form="ui-body-a" class="ui-body ui-body-a ui-corner-all">
+				<h3>3D</h3>
+				<p>BIGLIETTO INTERO 3D € 7.00<br>(il prezzo più basso della Provincia)</p>
+				<p>MERCOLEDI RIDOTTI X TUTTI € 6.00</p>
+				<p><abbr title="(per bambini fino a 10 anni, over65 , tutte le forze dell’ ordine)( Esibire documento o tesserino di riconoscimento)">BIGLIETTTO RIDOTTO TUTTI I GIORNI € 6.00.</abbr></p>
+			</div>
+			<strong><a href="#page8" data-role="button" class="ui-btn ui-icon-info ui-btn-icon-left">Vai alle Convenzioni</a></strong>	 					
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+<div data-role="page" id="page8">
+	<div data-role="header">
+		<h1>Convenzioni</h1>
+	</div>
+	<div data-role="content">	
+		<h3><img src="images/Grande-Cinema-31.jpg" alt="Grande Cinema 3" style="width:100%; max-width:500px; margin:4px auto 4px auto;" /></h3>
+		<h3>Cinema convenzionato grande cinema 3: tutte le settimane entri al cinema gratis.*</h3>
+		<p><strong>* <em>Valida solo per i film convenzionati Grande Cinema 3<br /><br /></em></strong></p>
+		<strong><a href="tel:+39092561003" data-role="button" class="ui-btn ui-icon-phone ui-btn-icon-left">Per info e prenotazioni: 0925 61003</a></strong>					
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<a href="#page" data-role="button" data-direction="reverse" class="ui-btn ui-icon-home ui-btn-icon-left indietro">Indietro</a>
+	</div>
+</div>
+</body>
+</html>
