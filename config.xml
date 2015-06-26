@@ -1,5 +1,5 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.cinemaagrigento.mobile" version="1.0.0">
-  <name>riberapp</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.cinemaribera.mobile" version="1.0.0">
+  <name>Cinema Ribera</name>
   <description>Questa è l'applicazione per consultare la programmazione delle sale cinematografiche di Ribera e Agrigento.</description>
   <author href="www.cinemaribera.it" email="380gradi@gmail.com">380gradi@gmail.com</author>
   <content src="index.html"/>
